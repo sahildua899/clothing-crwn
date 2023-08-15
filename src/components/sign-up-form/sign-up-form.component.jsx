@@ -6,7 +6,6 @@ import Button from '../button/button.component';
 
 
 
-
 const defaultFormFields = {
     displayName:'',
     email:'',
@@ -17,6 +16,7 @@ const defaultFormFields = {
  const SignUpForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const {displayName,email,password,confirmPassword} = formFields;
+
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields)
@@ -31,6 +31,7 @@ const defaultFormFields = {
         try {
             const {user} = await createAuthUserWithEmailAndPassword(email,password);
             await createUserDocumentFromAuth(user, {displayName})
+
             resetFormFields()
         } catch (error) {
             if(error.code === 'auth/email-already-in-use') {
@@ -40,7 +41,6 @@ const defaultFormFields = {
         }
     }
 
-    console.log(formFields)
 
     const handleChange = (event) =>{
         const {name, value} = event.target;
